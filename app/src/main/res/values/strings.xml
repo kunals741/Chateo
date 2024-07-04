@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Chateo</string>
+    <string name="onboarding_image">Onboarding Image</string>
+    <string name="onboarding_text">Connect easily with your family and friends over countries</string>
 </resources>
