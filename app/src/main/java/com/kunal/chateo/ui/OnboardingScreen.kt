@@ -25,7 +25,7 @@ import com.kunal.chateo.ui.theme.BlueColor
 import com.kunal.chateo.ui.theme.OffWhite
 
 @Composable
-fun OnboardingScreen(modifier: Modifier) {
+fun OnboardingScreen(modifier: Modifier, onStartMessagingClick: () -> Unit) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = modifier.fillMaxSize()
@@ -56,8 +56,7 @@ fun OnboardingScreen(modifier: Modifier) {
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(start = 24.dp, end = 24.dp, bottom = 32.dp),
-            onClick = {//todo
-            }
+            onClick = { onStartMessagingClick() }
         ) {
             Text(
                 stringResource(R.string.start_messaging).uppercase(),
@@ -77,5 +76,5 @@ fun OnboardingScreen(modifier: Modifier) {
 )
 @Composable
 fun OnboardingScreenPreview() {
-    OnboardingScreen(Modifier)
+    OnboardingScreen(Modifier, {})
 }

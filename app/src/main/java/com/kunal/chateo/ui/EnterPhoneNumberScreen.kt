@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.content.res.Configuration
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -48,7 +49,11 @@ import com.kunal.chateo.ui.theme.mulishFontFamily
 @OptIn(ExperimentalMaterial3Api::class)
 @SuppressLint("RememberReturnType")
 @Composable
-fun EnterPhoneNumberScreen(modifier: Modifier) {
+fun EnterPhoneNumberScreen(
+    modifier: Modifier,
+    onBackIconClick: () -> Unit,
+    onContinueClick: (String) -> Unit
+) {
     var enteredPhoneNumber by rememberSaveable { mutableStateOf("") }
     val enabled by remember { mutableStateOf(true) }
     val interactionSource = remember { MutableInteractionSource() }
@@ -59,7 +64,9 @@ fun EnterPhoneNumberScreen(modifier: Modifier) {
     Image(
         painter = painterResource(R.drawable.ic_back),
         contentDescription = stringResource(R.string.back_icon),
-        modifier = modifier.padding(top = 16.dp, start = 16.dp)
+        modifier = modifier
+            .padding(top = 16.dp, start = 16.dp)
+            .clickable { onBackIconClick() }
     )
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -80,6 +87,7 @@ fun EnterPhoneNumberScreen(modifier: Modifier) {
             color = OffWhite,
             modifier = Modifier.padding(top = 8.dp, start = 40.dp, end = 40.dp)
         )
+
         Row(
             modifier = Modifier.padding(top = 48.dp, start = 24.dp, end = 24.dp)
         ) {
@@ -161,8 +169,7 @@ fun EnterPhoneNumberScreen(modifier: Modifier) {
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(start = 24.dp, end = 24.dp, bottom = 32.dp),
-            onClick = {//todo
-            }
+            onClick = { onContinueClick(enteredPhoneNumber) }
         ) {
             Text(
                 stringResource(R.string.continue_btn).uppercase(),
@@ -178,5 +185,5 @@ fun EnterPhoneNumberScreen(modifier: Modifier) {
 @Preview(showSystemUi = true, uiMode = Configuration.UI_MODE_NIGHT_YES)
 @Composable
 fun EnterPhoneNumberScreenPreview() {
-    EnterPhoneNumberScreen(Modifier)
+    EnterPhoneNumberScreen(Modifier, {}, {})
 }
