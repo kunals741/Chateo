@@ -68,7 +68,5 @@ val Typography = Typography(
         fontFamily = mulishFontFamily,
         fontWeight = FontWeight.SemiBold,
         fontSize = 10.sp
-    ),
-
     )
-
+)

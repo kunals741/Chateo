@@ -8,8 +8,8 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.ui.Modifier
+import com.kunal.chateo.ui.OnboardingScreen
 import com.kunal.chateo.ui.theme.ChateoTheme
-import com.kunal.chateo.ui.theme.OnboardingScreen
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -19,6 +19,7 @@ class MainActivity : ComponentActivity() {
             ChateoTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
                     OnboardingScreen(modifier = Modifier.padding(innerPadding))
+                    //EnterPhoneNumberScreen(modifier = Modifier.padding(innerPadding))
                 }
             }
         }
