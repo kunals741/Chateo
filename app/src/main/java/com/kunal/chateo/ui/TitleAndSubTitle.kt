@@ -10,6 +10,8 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.kunal.chateo.ui.theme.OffWhite
 
+
+//todo
 @Composable
 fun TitleAndSubTitle(modifier: Modifier, title: String?, subTitle: String?) {
     Column(modifier = modifier) {

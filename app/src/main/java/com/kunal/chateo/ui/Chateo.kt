@@ -5,6 +5,7 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.toRoute
 import kotlinx.serialization.Serializable
 
 @Serializable
@@ -22,7 +23,7 @@ data class OTPScreen(
 fun ChateoApp(modifier: Modifier) {
     val navController = rememberNavController()
 
-    NavHost(navController, startDestination = Onboarding) {
+    NavHost(navController, startDestination = OTPScreen("7709954811")) {
         composable<Onboarding> {
             OnboardingScreen(
                 modifier,
@@ -37,7 +38,14 @@ fun ChateoApp(modifier: Modifier) {
             )
         }
         composable<OTPScreen> {
-            //todo
+            val args = it.toRoute<OTPScreen>()
+            EnterOTPScreen(
+                modifier,
+                mobileNumber = args.mobileNumber,
+                onBackIconClick = { navController.popBackStack() },
+                onVerifyOtpClick = {//todo
+                }
+            )
         }
     }
 }

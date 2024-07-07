@@ -29,6 +29,7 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
@@ -55,8 +56,9 @@ fun EnterPhoneNumberScreen(
     onContinueClick: (String) -> Unit
 ) {
     var enteredPhoneNumber by rememberSaveable { mutableStateOf("") }
-    val enabled by remember { mutableStateOf(true) }
+    var enabled by rememberSaveable { mutableStateOf(true) }
     val interactionSource = remember { MutableInteractionSource() }
+    val keyboardController = LocalSoftwareKeyboardController.current
 
 
     val selectedCountryCode by rememberSaveable { mutableStateOf("\uD83C\uDDEE\uD83C\uDDF3 +91") }
@@ -107,6 +109,9 @@ fun EnterPhoneNumberScreen(
                 onValueChange = {
                     if (it.isDigitsOnly() && it.length <= 10) {
                         enteredPhoneNumber = it
+                    }
+                    if (it.length == 10) {
+                        keyboardController?.hide()
                     }
                 },
                 enabled = enabled,
@@ -165,11 +170,12 @@ fun EnterPhoneNumberScreen(
             colors = ButtonDefaults.buttonColors(
                 containerColor = BlueColor
             ),
+            enabled = (enteredPhoneNumber.length == 10),
             shape = RoundedCornerShape(30.dp),
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(start = 24.dp, end = 24.dp, bottom = 32.dp),
-            onClick = { onContinueClick(enteredPhoneNumber) }
+            onClick = { onContinueClick("+91 $enteredPhoneNumber") } //todo hardcoding countrycode
         ) {
             Text(
                 stringResource(R.string.continue_btn).uppercase(),
